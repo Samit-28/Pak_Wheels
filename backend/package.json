@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.7.0",
+    "formidable": "^3.5.4",
+    "jsonwebtoken": "^9.0.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.5.1",
+    "prisma": "^6.16.1",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "vercel-build": "prisma generate"
+  }
+}

@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Condition {
+  New
+  Used
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  phone     String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cars      Car[]       // cars this user is selling
+  wishlist  Car[]       @relation("Wishlist")  // cars this user saved
+}
+
+model Car {
+  id          Int        @id @default(autoincrement())
+  make        String
+  model       String
+  year        Int
+  price       Float
+  location    String
+  condition   Condition
+  description String?
+
+  imageUrl    String?      // main image
+  imageUrls   String[]     // gallery images
+
+  mileage     Int?
+  color       String?
+  engine      String?
+  transmission String?
+  fuelType    String?
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  isActive    Boolean    @default(true)   // optional, if you want to deactivate listings
+
+  sellerId    Int
+  seller      User       @relation(fields: [sellerId], references: [id])
+
+  wishlistedBy User[]    @relation("Wishlist")
+}
